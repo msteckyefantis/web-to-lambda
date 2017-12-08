@@ -3,6 +3,7 @@
     <head>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <title>Website Size Mega Getter</title>
 
@@ -88,20 +89,165 @@
 
         <script>
 
+            window.LESSONSHOP_URL = 'https://LessonShop.net';
+            window.VANDIUM_URL = 'https://vanidum.io';
+            window.GITHUB_URL = 'https://github.com';
+
             window.apiId = null;
+            window.awsRegion = null;
 
-            function setTheActualSize( size ) {
+            function setTheActualAndItsColour( size, sizeColour, unit ) {
 
-                var theActualSizeElement = document.getElementById( "theActualSize" );
+                // NOTE: in real code, it's better to use a default value than this logic
+                if( !unit && (unit !== '') ) {
 
-                theActualSizeElement.innerHTML = size + ' MB';
+                    unit = ' MB'
+                }
+
+                var theActualSizeElement = document.getElementById( 'theActualSize' );
+
+                theActualSizeElement.innerHTML = size + unit;
+
+                if( !!sizeColour ) {
+
+                    theActualSizeElement.style.color = sizeColour;
+                }
             }
 
-            function setCurrentValue( id, windowKey ) {
+            function setCurrentInputValue( id, windowKey ) {
 
                 var value = document.getElementById( id ).value;
 
+                console.log( 'windowKey =', id );
+
                 window[ windowKey ] = value;
+            }
+
+            function getWebsiteSize( url, website ) {
+
+                var headers = {
+
+                    'Content-Type': 'application/json',
+                };
+
+                // NOTE: the body needs to be stringified for using $.ajax
+                var body = JSON.stringify({
+
+                    website
+                });
+
+                var values = Object.freeze({
+
+                    url,
+                    method: 'POST',
+                    /* NOTE: using POST request for demonstrative purposes only.
+                     A GET request makes more sense for this particular function
+                     because this function is getting something */
+                    headers,
+                    crossDomain: true,
+                    processData: false,
+                    async: true,
+                    data: body,
+                });
+
+                return $.ajax(
+
+                    values
+                )
+                .then(
+
+                    function( response ) {
+
+                        console.log( 'API call response:', response );
+
+                        return {
+
+                            data: {
+
+                                websiteSize: response.websiteSize
+                            },
+
+                            error: null
+                        };
+                    },
+
+                    function( err ) {
+
+                        console.log( 'API call error:', err );
+
+                        return {
+
+                            data: null,
+
+                            error: err
+                        }
+                    }
+                );
+            }
+
+            function doGetWebsite( website ) {
+
+                var apiId = window.apiId;
+                var awsRegion = window.awsRegion;
+
+                if(
+                    !apiId ||
+                    !awsRegion ||
+                    (apiId.length > 50) ||
+                    (awsRegion.length > 50)
+                ) {
+
+                    setTheActualAndItsColour( 'Invalid Input', 'red', '' );
+
+                    return Promise.resolve();
+                }
+
+                var buttons = document.getElementsByClassName( 'getTheActualSizeButton' );
+
+                buttons = Array.from( buttons );
+
+                buttons.forEach( function( button ) {
+
+                    button.disabled = true;
+                });
+
+                var url = (
+
+                    'https://' +
+                    apiId +
+                    '.execute-api.' +
+                    awsRegion +
+                    '.amazonaws.com/mega_website_size_get'
+                );
+
+                return getWebsiteSize(
+
+                    url,
+                    website
+
+                ).then( function( results ) {
+
+
+                    buttons.forEach( function( button ) {
+
+                        button.disabled = false;
+                    });
+
+                    if( !!results.error ) {
+
+                        return setTheActualAndItsColour(
+
+                            results.error.message || 'error in mega getting size',
+                            'red',
+                            ''
+                        );
+                    }
+
+                    setTheActualAndItsColour(
+
+                        results.data
+                    );
+                });
             }
 
         </script>
@@ -116,21 +262,22 @@
                     class="theActualInputs"
                     id="theApiIdInput"
                     placeholder="Your API ID"
-                    onChange="setCurrentValue( 'theApiIdInput', 'apiId' )"
+                    onChange="setCurrentInputValue( 'theApiIdInput', 'apiId' )"
                 >
                 <input
                     class="theActualInputs"
                     id="theRegionInput"
                     placeholder="Your AWS Region"
-                    onChange="setCurrentValue( 'theRegionInput', 'awsRegion' )"
+                    onChange="setCurrentInputValue( 'theRegionInput', 'awsRegion' )"
                 >
             </div>
 
             <div id="theButtonDiv">
                 <button
 
+                    id="lessonShopButton"
                     class="getTheActualSizeButton"
-                    onclick="setTheActualSize(69)"
+                    onclick="doGetWebsite( LESSONSHOP_URL )"
                 >
                     Get the Size of LessonShop.net
                 </button>
@@ -139,7 +286,7 @@
 
                     id="vandiumButton"
                     class="getTheActualSizeButton"
-                    onclick="setTheActualSize(42)"
+                    onclick="doGetWebsite( VANDIUM_URL )"
                 >
                     Get the Size of Vandium.io
                 </button>
@@ -148,7 +295,7 @@
 
                     id="gitHubButton"
                     class="getTheActualSizeButton"
-                    onclick="setTheActualSize(1000000)"
+                    onclick="doGetWebsite( GITHUB_URL )"
                 >
                     Get the Size of GitHub.com
                 </button>
