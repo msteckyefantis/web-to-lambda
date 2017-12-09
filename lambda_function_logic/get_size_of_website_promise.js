@@ -3,11 +3,11 @@
 const https = require( 'https' );
 
 
-module.exports = ( website ) => {
+module.exports = ( websiteUrl ) => {
 
     return new Promise( (resolve, reject) => {
 
-        https.get( website, response => {
+        https.get( websiteUrl, response => {
 
             response.on( 'error', err => {
 

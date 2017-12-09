@@ -127,7 +127,7 @@
                 window[ windowKey ] = value;
             }
 
-            function getSizeOfWebsite( url, website ) {
+            function getSizeOfWebsite( apiUrl, websiteUrl ) {
 
                 var headers = {
 
@@ -137,12 +137,12 @@
                 // NOTE: the body needs to be stringified for using $.ajax
                 var body = JSON.stringify({
 
-                    website
+                    websiteUrl
                 });
 
                 var values = Object.freeze({
 
-                    url,
+                    url: apiUrl,
                     method: 'POST',
                     /* NOTE: using a POST request for demonstrative purposes only.
                      A GET request makes more sense for this particular function
@@ -189,7 +189,7 @@
                 );
             }
 
-            function getAndSetWebsiteSize( website ) {
+            function getAndSetWebsiteSize( websiteUrl ) {
 
                 var apiId = window.apiId;
                 var awsRegion = window.awsRegion;
@@ -226,7 +226,7 @@
                     button.style.background = 'grey';
                 });
 
-                var url = (
+                var apiUrl = (
 
                     'https://' +
                     apiId +
@@ -237,8 +237,8 @@
 
                 return getSizeOfWebsite(
 
-                    url,
-                    website
+                    apiUrl,
+                    websiteUrl
 
                 ).then( function( results ) {
 

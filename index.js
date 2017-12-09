@@ -7,7 +7,7 @@ const getSizeOfWebsitePromise = require(
     './lambda_function_logic/get_size_of_website_promise.js'
 );
 
-const websiteRegex = /^https:\/\/lessonshop.net$|^https:\/\/vandium.io$|https:\/\/github.com$/;
+const websiteUrlRegex = /^https:\/\/lessonshop.net$|^https:\/\/vandium.io$|https:\/\/github.com$/;
 
 const validation = {
 
@@ -16,7 +16,7 @@ const validation = {
 
     body: {
 
-        website: vandium.types.string().regex( websiteRegex ),
+        websiteUrl: vandium.types.string().regex( websiteUrlRegex ),
     }
 };
 
@@ -37,15 +37,15 @@ exports.handler = vandium.api()
 
             console.log( 'the event:', JSON.stringify( event, null, 4 ) );
 
-            const website = event.body.website;
+            const websiteUrl = event.body.websiteUrl;
 
-            console.log( 'the requested website is:', website );
+            console.log( 'the requested website url is:', websiteUrl );
 
             console.log( 'getting the size of the requested website' );
 
             return getSizeOfWebsitePromise(
 
-                website
+                websiteUrl
 
             ).then( sizeOfWebsite => {
 
