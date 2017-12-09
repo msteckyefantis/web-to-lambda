@@ -56,8 +56,8 @@ exports.handler = vandium.api()
 
                 console.log(
 
-                    'Successfully got the size of the website returning',
-                    'the following object',
+                    'Successfully got the size of the website,',
+                    'returning the following object:',
                     JSON.stringify( data, null, 4 )
                 );
 

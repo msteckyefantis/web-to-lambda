@@ -39,7 +39,7 @@ module.exports = ( websiteUrl ) => {
 
                 console.log(
 
-                    'here is the size of the website: ',
+                    'here is the size of the website:',
                     sizeOfWebsite
                 );
 
