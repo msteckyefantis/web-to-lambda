@@ -1,0 +1,28 @@
+{
+  "name": "web_to_lambda",
+  "version": "1.0.0",
+  "description": "NPM package associated with Medium article",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://msteckyefantis@github.com/msteckyefantis/mega_article.git"
+  },
+  "keywords": [
+    "lambda",
+    "web",
+    "aws",
+    "api"
+  ],
+  "author": "Michael Stecky-Efantis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msteckyefantis/mega_article/issues"
+  },
+  "homepage": "https://github.com/msteckyefantis/mega_article#readme",
+  "dependencies": {
+    "vandium": "^4.6.0"
+  }
+}

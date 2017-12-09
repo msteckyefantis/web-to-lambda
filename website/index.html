@@ -56,7 +56,6 @@
 
             .getTheActualSizeButton {
 
-                background-color: #2D9CDB;
                 border: none;
                 color: white;
                 padding: 15px 32px;
@@ -65,6 +64,11 @@
                 font-size: 16px;
                 cursor: pointer;
                 margin: 13px;
+            }
+
+            #lessonShopButton {
+
+                background-color: #2D9CDB;
             }
 
             #vandiumButton {
@@ -89,8 +93,8 @@
 
         <script>
 
-            window.LESSONSHOP_URL = 'https://LessonShop.net';
-            window.VANDIUM_URL = 'https://vanidum.io';
+            window.LESSONSHOP_URL = 'https://lessonshop.net';
+            window.VANDIUM_URL = 'https://vandium.io';
             window.GITHUB_URL = 'https://github.com';
 
             window.apiId = null;
@@ -173,7 +177,7 @@
 
                     function( err ) {
 
-                        console.log( 'API call error:', err );
+                        console.error( 'API call error:', err );
 
                         return {
 
@@ -202,13 +206,21 @@
                     return Promise.resolve();
                 }
 
-                var buttons = document.getElementsByClassName( 'getTheActualSizeButton' );
+                var lessonShopButton = document.getElementById( 'lessonShopButton' );
+                var vandiumButton = document.getElementById( 'vandiumButton' );
+                var gitHubButton = document.getElementById( 'gitHubButton' );
 
-                buttons = Array.from( buttons );
+                var buttons = [
+
+                    lessonShopButton,
+                    vandiumButton,
+                    gitHubButton
+                ];
 
                 buttons.forEach( function( button ) {
 
                     button.disabled = true;
+                    button.style.background = 'grey';
                 });
 
                 var url = (
@@ -217,7 +229,7 @@
                     apiId +
                     '.execute-api.' +
                     awsRegion +
-                    '.amazonaws.com/mega_website_size_get'
+                    '.amazonaws.com/ultra/mega-website-size-get'
                 );
 
                 return getWebsiteSize(
@@ -227,17 +239,35 @@
 
                 ).then( function( results ) {
 
-
                     buttons.forEach( function( button ) {
 
                         button.disabled = false;
                     });
 
+                    lessonShopButton.style.background = '#2D9CDB';
+                    vandiumButton.style.background = '#FF9300';
+                    gitHubButton.style.background = '#24292E';
+
                     if( !!results.error ) {
+
+                        var errorMessage = (
+
+                            results.error.message ||
+                            results.error.statusText ||
+                            'error in mega getting size'
+                        );
+
+                        if( errorMessage === 'error' ) {
+
+                            errorMessage = (
+
+                                "error, it's possible the url input is incorrect, check the console please"
+                            );
+                        }
 
                         return setTheActualAndItsColour(
 
-                            results.error.message || 'error in mega getting size',
+                            errorMessage,
                             'red',
                             ''
                         );
@@ -245,7 +275,7 @@
 
                     setTheActualAndItsColour(
 
-                        results.data
+                        results.data.websiteSize
                     );
                 });
             }
@@ -302,7 +332,7 @@
             </div>
 
             <div id="theSize">
-                <text> The Size: </text>
+                <text> The size: </text>
                 <text id="theActualSize"> N/A </text>
             </div>
         </div>
