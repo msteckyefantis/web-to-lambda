@@ -34,11 +34,32 @@ exports.handler = vandium.api()
 
             console.log( 'the event:', JSON.stringify( event, null, 4 ) );
 
-            const website = event.website;
+            const website = event.body.website;
+
+            console.log( 'the requested website is:', website );
 
             console.log( 'getting the size of the requested website' );
 
-            return getSizeOfWebsitePromise( website );
+            return getSizeOfWebsitePromise(
+
+                website
+
+            ).then( sizeOfWebsite => {
+
+                const data = {
+
+                    sizeOfWebsite
+                };
+
+                console.log(
+
+                    'Successfully got the size of the website returning',
+                    'the following object',
+                    JSON.stringify( data, null, 4 )
+                );
+
+                return data;
+            });
         }
 
     ).onError( err => {
