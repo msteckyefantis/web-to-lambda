@@ -4,7 +4,7 @@ const vandium = require( 'vandium' );
 
 const getSizeOfWebsitePromise = require(
 
-    './lambda_function_logic/get_size_of_website_promise.js'
+    './lambda_function_logic/get_size_of_website_promise'
 );
 
 const websiteUrlRegex = /^https:\/\/lessonshop.net$|^https:\/\/vandium.io$|https:\/\/github.com$/;
