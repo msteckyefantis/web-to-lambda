@@ -14,7 +14,7 @@ module.exports = ( website ) => {
                 console.log( 'an error occured:', err );
                 console.log( 'here is the error message:', err.message );
 
-                resolve( err );
+                reject( err );
             });
 
             let theWebsiteString = '';
@@ -46,6 +46,5 @@ module.exports = ( website ) => {
                 resolve( sizeOfWebsite );
             });
         });
-
     });
 };
