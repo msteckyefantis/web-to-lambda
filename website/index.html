@@ -189,7 +189,7 @@
                 );
             }
 
-            function doGetWebsite( website ) {
+            function getAndSetWebsiteSize( website ) {
 
                 var apiId = window.apiId;
                 var awsRegion = window.awsRegion;
@@ -306,7 +306,7 @@
 
                     id="lessonShopButton"
                     class="getTheActualSizeButton"
-                    onclick="doGetWebsite( LESSONSHOP_URL )"
+                    onclick="getAndSetWebsiteSize( LESSONSHOP_URL )"
                 >
                     Get the Size of LessonShop.net
                 </button>
@@ -315,7 +315,7 @@
 
                     id="vandiumButton"
                     class="getTheActualSizeButton"
-                    onclick="doGetWebsite( VANDIUM_URL )"
+                    onclick="getAndSetWebsiteSize( VANDIUM_URL )"
                 >
                     Get the Size of Vandium.io
                 </button>
@@ -324,7 +324,7 @@
 
                     id="gitHubButton"
                     class="getTheActualSizeButton"
-                    onclick="doGetWebsite( GITHUB_URL )"
+                    onclick="getAndSetWebsiteSize( GITHUB_URL )"
                 >
                     Get the Size of GitHub.com
                 </button>
