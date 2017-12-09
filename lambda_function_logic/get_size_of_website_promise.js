@@ -3,9 +3,9 @@
 const https = require( 'https' );
 
 
-module.exports = ( websiteUrl ) => {
+module.exports = websiteUrl => {
 
-    return new Promise( (resolve, reject) => {
+    return new Promise( ( resolve, reject ) => {
 
         https.get( websiteUrl, response => {
 
