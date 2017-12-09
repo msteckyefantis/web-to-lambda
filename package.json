@@ -1,6 +1,6 @@
 {
   "name": "web_to_lambda",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "NPM package associated with Medium article",
   "main": "index.js",
   "scripts": {
