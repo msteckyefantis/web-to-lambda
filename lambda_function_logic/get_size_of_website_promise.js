@@ -31,7 +31,7 @@ module.exports = ( websiteUrl ) => {
 
                 console.log(
 
-                    'here is the complete result of the get request: ',
+                    'here is the complete result of the get request:',
                     theWebsiteString
                 );
 
