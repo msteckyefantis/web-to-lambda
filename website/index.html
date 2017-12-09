@@ -206,6 +206,9 @@
                     return Promise.resolve();
                 }
 
+                apiId = apiId.trim();
+                awsRegion = awsRegion.trim();
+
                 var lessonShopButton = document.getElementById( 'lessonShopButton' );
                 var vandiumButton = document.getElementById( 'vandiumButton' );
                 var gitHubButton = document.getElementById( 'gitHubButton' );
