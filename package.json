@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://msteckyefantis@github.com/msteckyefantis/mega_article.git"
+    "url": "https://github.com/msteckyefantis/web-to-lambda.git"
   },
   "keywords": [
     "lambda",
@@ -19,9 +19,9 @@
   "author": "Michael Stecky-Efantis",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/msteckyefantis/mega_article/issues"
+    "url": "https://github.com/msteckyefantis/web-to-lambda/issues"
   },
-  "homepage": "https://github.com/msteckyefantis/mega_article#readme",
+  "homepage": "https://github.com/msteckyefantis/web-to-lambda",
   "dependencies": {
     "vandium": "^4.6.0"
   }
