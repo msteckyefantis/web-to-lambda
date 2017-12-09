@@ -27,7 +27,7 @@ exports.handler = vandium.api()
         "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
     })
     .POST(
-        /* NOTE: using POST request for demonstrative purposes only.
+        /* NOTE: using a POST request for demonstrative purposes only.
          A GET request makes more sense for this particular function
          because this function is getting something */
 
