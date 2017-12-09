@@ -100,7 +100,7 @@
             window.apiId = null;
             window.awsRegion = null;
 
-            function setTheActualAndItsColour( size, sizeColour, unit ) {
+            function setTheActualSizeAndItsColour( size, sizeColour, unit ) {
 
                 // NOTE: in real code, it's better to use a default value than this logic
                 if( !unit && (unit !== '') ) {
@@ -201,7 +201,7 @@
                     (awsRegion.length > 50)
                 ) {
 
-                    setTheActualAndItsColour( 'Invalid Input', 'red', '' );
+                    setTheActualSizeAndItsColour( 'Invalid Input', 'red', '' );
 
                     return Promise.resolve();
                 }
@@ -265,7 +265,7 @@
                             );
                         }
 
-                        return setTheActualAndItsColour(
+                        return setTheActualSizeAndItsColour(
 
                             errorMessage,
                             'red',
@@ -275,7 +275,7 @@
 
                     var sizeInKB = (results.data.sizeOfWebsite/1000);
 
-                    setTheActualAndItsColour( sizeInKB );
+                    setTheActualSizeAndItsColour( sizeInKB );
                 });
             }
 
