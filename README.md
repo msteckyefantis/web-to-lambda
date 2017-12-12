@@ -4,4 +4,4 @@
 
 <br>
 
-NPM package associated with Medium article.
+NPM package associated with [Medium article](https://medium.com/@mikeysteckyefantis/effortlessly-setup-a-serverless-web-app-in-minutes-web-to-lambda-344d74ac3cbb "How to set up a serverless app with Vandium in minutes!").
